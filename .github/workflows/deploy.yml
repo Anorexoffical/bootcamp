@@ -9,12 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Base64 Key ko wapas normal key banayein
+      - name: Decode SSH Key
+        run: |
+          echo "${{ secrets.VM_SSH_KEY }}" | base64 -d > private_key.pem
+          chmod 600 private_key.pem
+
+      # 2. SSH connect karke deploy karein
       - name: Deploy over SSH
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VM_HOST }}
           username: ${{ secrets.VM_USER }}
-          key: ${{ secrets.VM_SSH_KEY }}
+          key_path: private_key.pem
           port: ${{ secrets.VM_PORT || 22 }}
           script: |
             set -e
