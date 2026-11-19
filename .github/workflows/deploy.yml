@@ -25,7 +25,7 @@ jobs:
           port: ${{ secrets.VM_PORT || 22 }}
           script: |
             set -e
-            cd /var/www/myapp
+            cd /var/www/sabzicart
             echo "==> Pull latest code"
             git fetch --all
             git reset --hard origin/main
