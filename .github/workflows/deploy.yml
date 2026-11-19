@@ -25,7 +25,7 @@ jobs:
           port: ${{ secrets.VM_PORT || 22 }}
           script: |
             set -e
-            cd /var/www/sabzicart
+            cd /var/www/sabzicart/
             echo "==> Pull latest code"
             git pull origin main  
             echo "==> Reload Nginx"
